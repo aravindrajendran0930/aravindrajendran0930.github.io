@@ -1,0 +1,469 @@
+<head>
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" ></link>
+
+  <style type="text/css">
+.groups{
+border-style: solid;
+    border-width: 5px;
+
+}
+
+.modebar{
+  display: none;
+}
+
+.legendtoggle{
+
+  margin-top: 100px;
+}
+.svg-container{
+
+  margin-top: 100px;
+}
+  </style>
+</head>
+<body>
+<!-- Plotly chart will be drawn inside this DIV -->
+<div id="myDiv"></div>
+  <script>
+  var myPlot = document.getElementById('myDiv'),
+    d3 = Plotly.d3,
+    N = 8,
+
+
+    //x1 = d3.range(N).map( d3.random.normal() ),
+    x1 = [1,2,3,4,5,6,7,8,9,10],
+x2 = [1,2,3,4,5,6,7,8,9,10],
+x3 = [1,2,3,4,5,6,7,8,9,10],
+x4 = [1,2,3,4,5,6,7,8,9,10],
+x5 = [1,2,3,4,5,6,7,8,9,10],
+x6 = [1,2,3,4,5,6,7,8,9,10],
+x7 = [1,2,3,4,5,6,7,8,9,10],
+x8 = [1,2,3,4,5,6,7,8,9,10],
+x9 = [1,2,3,4,5,6,7,8,9,10],
+
+
+    
+y1 = [19,2,17,0,2,7,2,7,2,1],
+y2 = [0,19,6,0,10,2,3,2,0,3],
+y3 = [7,4,0,0,20,4,0,0,0,0],
+y4 = [9,4,10,0,1,8,3,0,0,0],
+y5 = [0,0,0,6,7,15,0,0,2,0],
+y6 = [4,3,8,1,3,1,0,0,0,0],
+y7 = [1,2,5,0,2,4,0,3,6,0],
+y8 = [6,5,2,0,0,6,0,0,0,3],
+y9 = [0,0,3,0,0,0,4,10,3,0],
+
+    Intention1 =['KS = 19, NA = 0, PS = 0, ML = 0',
+                'KS = 2, NA = 0, PS = 0, ML = 0',
+                'KS = 15, NA = 2, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 2, NA = 0, PS = 0, ML = 0',
+                'KS = 7, NA = 0, PS = 0, ML = 0',
+                'KS = 2, NA = 0, PS = 0, ML = 0',
+                'KS = 7, NA = 0, PS = 0, ML = 0',
+                'KS = 2, NA = 0, PS = 0, ML = 0',
+                'KS = 1, NA = 0, PS = 0, ML = 0'
+                ];
+    Intention2 =['KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 3, NA = 15, PS = 1, ML = 0',
+                'KS = 2, NA = 4, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 4, NA = 6, PS = 0, ML = 0',
+                'KS = 1, NA = 1, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 3, ML = 0',
+                'KS = 2, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 1, NA = 2, PS = 0, ML = 0'
+                ];
+    Intention3 =['KS = 2, NA = 3, PS = 2, ML = 0',
+                'KS = 0, NA = 2, PS = 2, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 13, PS = 7, ML = 0',
+                'KS = 0, NA = 3, PS = 1, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0'
+              ];
+    Intention4 =['KS = 4, NA = 4, PS = 0, ML = 1',
+                'KS = 3, NA = 0, PS = 0, ML = 1',
+                'KS = 1, NA = 4, PS = 0, ML = 1',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 1, NA = 0, PS = 0, ML = 0',
+                'KS = 5, NA = 1, PS = 2, ML = 0',
+                'KS = 3, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0'
+                ];
+    Intention5 =['KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 1, NA = 2, PS = 0, ML = 3',
+                'KS = 4, NA = 0, PS = 1, ML = 2',
+                'KS = 3, NA = 6, PS = 1, ML = 5',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 1, NA = 1, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0'
+                ];
+    Intention6 =['KS = 1, NA = 0, PS = 3, ML = 0',
+                'KS = 1, NA = 1, PS = 1, ML = 0',
+                'KS = 1, NA = 3, PS = 0, ML = 4',
+                'KS = 0, NA = 0, PS = 0, ML = 1',
+                'KS = 3, NA = 0, PS = 0, ML = 0',
+                'KS = 1, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0'
+                ];
+    Intention7 =['KS = 1, NA = 0, PS = 0, ML = 0',
+                'KS = 1, NA = 1, PS = 0, ML = 0',
+                'KS = 3, NA = 2, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 2, NA = 0, PS = 0, ML = 0',
+                'KS = 2, NA = 2, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 1, NA = 1, PS = 1, ML = 0',
+                'KS = 0, NA = 5, PS = 1, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0'
+                ];
+    Intention8 =['KS = 2, NA = 3, PS = 0, ML = 1',
+                'KS = 1, NA = 3, PS = 0, ML = 1',
+                'KS = 1, NA = 1, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 1, NA = 2, PS = 0, ML = 3',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 2, PS = ,M L = 1'
+                ];
+    Intention9 =['KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 2, PS = 1, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0',
+                'KS = 1, NA = 3, PS = 0, ML = 0',
+                'KS = 1, NA = 7, PS = 2, ML = 0',
+                'KS = 0, NA = 3, PS = 0, ML = 0',
+                'KS = 0, NA = 0, PS = 0, ML = 0'
+                ];
+
+    
+
+    periods = ['Period 1','Period 2','Period 3','Period 4','Period 5','Period 6','Period 7','Period 8','Period 9','Period 10',]
+    data = [{ x: x1, y: y1, text: Intention1, type: 'scatter', name: 'A0074', hoverinfo: 'Intention1',
+              mode: 'markers', marker: {color: 'rgba(150, 180, 10, .7)', size: 10}
+            },
+            { x: x2, y: y2, text: Intention2, type: 'scatter', name: 'A0011', hoverinfo: 'text+x+y',
+             mode: 'markers', marker: {color: 'rgba(250, 200, 140, .9)', size: 10}
+            },
+            { x: x3, y: y3, text: Intention3, type: 'scatter', name: 'A0039', hoverinfo: 'text+x+y',
+             mode: 'markers', marker: {color: 'rgba(40, 60, 250, .8)', size: 10}
+            },
+            { x: x4, y: y4, text: Intention4, type: 'scatter', name: 'A0005', hoverinfo: 'text+x+y',
+             mode: 'markers', marker: {color: 'rgba(200, 10, 200, .8)', size: 10}
+            },
+            { x: x5, y: y5, text: Intention5, type: 'scatter', name: 'A0046', hoverinfo: 'text+x+y',
+             mode: 'markers', marker: {color: 'rgba(10, 190, 10, .8)', size: 10}
+            },
+            { x: x6, y: y6, text: Intention6, type: 'scatter', name: 'B0007', hoverinfo: 'text+x+y',
+             mode: 'markers', marker: {color: 'rgba(120, 160, 130, .7)', size: 10}
+            },
+            { x: x7, y: y7, text: Intention7, type: 'scatter', name: 'A0009', hoverinfo: 'text+x+y',
+             mode: 'markers', marker: {color: 'rgba(200, 90, 100, .7)', size: 10}
+            },
+            { x: x8, y: y8, text: Intention8, type: 'scatter', name: 'A0008', hoverinfo: 'text+x+y',
+             mode: 'markers', marker: {color: 'rgba(100, 90, 180, .8)', size: 10}
+            },
+            { x: x9, y: y9, text: Intention9, type: 'scatter', name: 'A0020', hoverinfo: 'text+x+y',
+             mode: 'markers', marker: {color: 'rgba(50, 190, 170, .8)', size: 10}
+            }];
+
+
+    layout = { 
+        hovermode:'closest',
+        title:'User Activity Chart',
+        xaxis:{title:'Period (3 months each)-->' ,zeroline:false, hoverformat: '.2r'},
+        yaxis:{title:'User Activity (number of visits to the site)', zeroline:false, hoverformat: '.2r'}
+     };
+
+Plotly.newPlot('myDiv', data, layout);
+
+myPlot.on('plotly_hover', function (eventdata){
+    var points = eventdata.points[0],
+        pointNum = points.pointNumber;
+
+   
+});
+  </script>
+  <div style="top: 400px;position: absolute;right: 45%;margin-top:20px"><h4>User Intention Pattern </h4></div>
+  <div style="position:absolute;top:50px;right:30px;">
+    <p><b>Select User Id's to view<br> pattern for the user</b>
+    
+    </p></div>
+    <div>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      var data;
+
+      function drawChart(value) {
+
+if(value==1||value==2||value==3){
+  d3.select('#piechart').remove();
+d3.select('#chart').append('div').attr('id','piechart');}
+var data;
+
+        if(value=='1'){ data = google.visualization.arrayToDataTable([
+                        ['Intention','Percentage'],
+                        ['KS',29],
+                        ['NA',10],
+                        ['PS',5],
+                        ['ML',2]
+
+                     ]); }
+          else if(value=='2') { data = google.visualization.arrayToDataTable([
+                        ['Intention','Percentage'],
+                        ['KS',11],
+                        ['NA',22],
+                        ['PS',4],
+                        ['ML',2]
+
+                     ]);}
+          else if(value=='3'){ data = google.visualization.arrayToDataTable([
+                        ['Intention','Percentage'],
+                        ['KS',27],
+                        ['NA',18],
+                        ['PS',1],
+                        ['ML',5]
+
+                     ]);}
+          else if(value=='4') { data = google.visualization.arrayToDataTable([
+                        ['Intention','Percentage'],
+                        ['KS',1],
+                        ['NA',2],
+                        ['PS',0],
+                        ['ML',4]
+
+                     ]);}
+          else if(value=='5'){ data = google.visualization.arrayToDataTable([
+                        ['Intention','Percentage'],
+                        ['KS',16],
+                        ['NA',19],
+                        ['PS',8],
+                        ['ML',2]
+
+                     ]);}
+          else if(value=='6') { data = google.visualization.arrayToDataTable([
+                        ['Intention','Percentage'],
+                        ['KS',20],
+                        ['NA',15],
+                        ['PS',4],
+                        ['ML',8]
+
+                     ]);}
+          else if(value=='7'){ data = google.visualization.arrayToDataTable([
+                        ['Intention','Percentage'],
+                        ['KS',6],
+                        ['NA',3],
+                        ['PS',3],
+                        ['ML',0]
+
+                     ]);}
+          else if(value=='8') { data = google.visualization.arrayToDataTable([
+                        ['Intention','Percentage'],
+                        ['KS',11],
+                        ['NA',7],
+                        ['PS',3],
+                        ['ML',0]
+
+                     ]);}
+          else if(value=='9') { data = google.visualization.arrayToDataTable([
+                        ['Intention','Percentage'],
+                        ['KS',3],
+                        ['NA',9],
+                        ['PS',1],
+                        ['ML',0]
+
+                     ]);}
+          else if(value=='10') { data = google.visualization.arrayToDataTable([
+                        ['Intention','Percentage'],
+                        ['KS',2],
+                        ['NA',4],
+                        ['PS',0],
+                        ['ML',1]
+
+                     ]);}
+          else { data = google.visualization.arrayToDataTable([
+                        ['Intention','Percentage'],
+                        ['KS',29],
+                        ['NA',10],
+                        ['PS',5],
+                        ['ML',2]
+
+                     ]); }
+
+        
+        var options = {
+          title: ' ',
+          pieHole: 0.15,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+    <div id = "chart">
+    <div id="piechart">
+    </div>
+
+    <style type="text/css">
+    div .piechart{
+      width: 900px; 
+      height: 500px;
+    }
+    </style>
+</div>
+<div>
+  <p><center><strong>Select the Quarter (time period) to view its popular user intentions</strong></center></p>
+    <center><select id ="ddl" name="ddl" onmousedown="this.value='';" onchange="drawChart(this.value);">
+  <option value='1'>Quarter 1</option>
+  <option value='2'>Quarter 2</option>
+  <option value='3'>Quarter 3</option>
+  <option value='4'>Quarter 4</option>
+  <option value='5'>Quarter 5</option>
+  <option value='6'>Quarter 6</option>
+  <option value='7'>Quarter 7</option>
+  <option value='8'>Quarter 8</option>
+</select></center>
+
+    </div>
+    <div id="observation" style="margin-top:50px">
+  <h3>Pattern Findings</h3>
+  <div class = "row">
+    <div class = "col-lg-1"> 
+      <strong><em>FINDING 1: </em></strong>
+    </div>
+    <div class = "col-lg-11">
+      <p><strong>Pattern: </strong>All the quarters(3-month periods) evidently contain a considerable amount of traffic from the Knowledge Seekers(KS). 
+        <br>
+        <strong>Explanation: </strong>This could mean that the site has proved to be a reliable source for solutions to technical queries.
+        <br>
+        <strong>Why Important ?:</strong>This information could be used to improve the quality of content hosted on the site to facilitate more knowledge seekers in the future.</p>
+
+    </div>
+  </div>
+  <div class = "row">
+   <div class = "col-lg-1"> 
+      <strong><em>FINDING 2: </em></strong>
+    </div>
+    <div class = "col-lg-11">
+      <p> <strong>Pattern: </strong>
+        Traffic of users with Method Learning(ML) intention has increased during later periods of investigation.
+         <br>
+         <strong>Explanation: </strong>This could be attributed to the popularity it received due to its interactiveness from the Knowledge Seekers (KS).<br>
+        <strong>Why Important ?:</strong> This means that the site is becoming popular among the method learning community from the knowledge seekers community.
+       </p>
+    
+    </div>
+  </div>
+  <div class = "row">
+    <div class = "col-lg-1"> 
+      <strong><em>FINDING 3:</em></strong> 
+    </div>
+    <div class = "col-lg-11">
+      <p><strong>Pattern: </strong>The pattern of people who came in for Problem Solving(PS) is periodic. 
+        <br>
+        <strong>Explanation: </strong>One could infer that if at a particular period there exists a demand for problem solvers, in the subsequent period the number of knowledge seekers complement them. And this pattern repeats for the entire period of investigation.
+        <br>
+        <strong>Why Important ?:</strong> Problem solving and knowledge seeking are the activities complementary to each other. Only if problems are solved would the knowledge seekers find interest in coming to the site.
+      </p> 
+    </div>
+  </div>
+ </div>
+<div class = "row">
+    <div class = "col-lg-1"> 
+      <strong><em>FINDING 4:</em></strong> 
+    </div>
+    <div class = "col-lg-11">
+      <p><strong>Pattern: </strong>The activity of majority of users show a yearly spike in usage pattern. 
+        <br>
+        <strong>Explanation: </strong>The activity recorded from certain users have a rough period of 1 year(4-periods). 
+        <br>
+        <strong>Why Important ?:</strong>The pattern could be used to improve the server to facilitate the user traffic at those hot-spots where there is more user traffic. </p> 
+    </div>
+  </div>
+
+</div>
+<div class = "row">
+    <div class = "col-lg-1"> 
+      <strong><em>FINDING 5:</em></strong> 
+    </div>
+    <div class = "col-lg-11">
+      <p><strong>Pattern: </strong>The periods 2 and 3 received the maximum number of traffic from the users when compared to any other periods.
+        <br>
+      <strong>Explanation: </strong>The average usage of periods can be observed from the first chart and it can be noted that the periods 2 and 3 contribute to the maximum number of incoming traffic
+      <br>
+      <strong>Why Important ?:</strong>We could increase the number of suggested topics or solutions to related searches if we know the period which has the most traffic.
+    </p> 
+
+    </div>
+  </div>
+    
+ 
+</div>
+
+
+<div id="inference">
+  <h3> Steps followed to obtain the result : </h3>
+  
+  <ul>
+  <li><p>I have considered the Class_Query dataset and analyzed the Timestamp, User ID and User Intentions to obtain my visualizations and findings</p></li>
+   <li><p>I have broken down the timeperiod given in the dataset into 8 quarters.</p></li>
+  <li><p>I have presented a bubble chart to show the user activity over the period of time considered. </p></li>
+  <li><p>I have presented a donut piechart to show the most popular user intentions during any chosen time period. </p></li> 
+  <li><p>I have presented a bubble chart to show the user activity over the period of time considered. </p></li>
+  <li><p>I have presented 5 findings and 3 interactions on the page. </p></li>
+  <li><p>I have compared the user activity pattern of individual users vs different users which incorporates the <b> social aspect of interaction. </b> </p></li>
+</ul>
+  <h3> Events implemented: </h3><p>
+  <ol> <li><strong> Click Event: </strong> The first event consists of the legends near the bubble chart which also serve as buttons to select which user id's visualization needs to be populated from the dataset. </li>
+    <li> <strong> Hover Event: </strong> The second is the on-hover event that occurs when the mouse is hovered on each of the userids on the bubblechart. The user intentions for that user are populated from the dataset. </li>
+     <li> <strong> Select Event: </strong> The third event is the selection from the drop-down menu which populates the time periods and displays the most popular user intentions for that time period.</p></li>
+
+</ol>  
+  
+  <h3> References: </h3>
+  <ul> 
+    <li> Base code referenced from : https://plot.ly/javascript/hover-events/ </li>
+    <li> http://d3js.org/ </li>
+    <li> Base code referenced from : https://google-developers.appspot.com/chart/interactive/docs/gallery/piechart </li>
+    <li> http://getbootstrap.com/</li>
+      </ul>
+
+
+</div>
+ <div class="footer" align="right">
+            <b><p>ARAVIND RAJENDRAN<br>
+             ASU ID : 1208684590</p></b>
+        </div>
+</body>
+</html>
